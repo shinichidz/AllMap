@@ -1,0 +1,92 @@
+if _G.ScriptLoaded then return end
+_G.ScriptLoaded = true
+
+-- Notify đầu
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Shinichi Hub",
+    Text = "Made by Shinichi | Code by Baor\nPlease support us - Discord for more update.",
+    Duration = 5
+})
+
+-- Copy Discord link
+if setclipboard then
+    setclipboard("https://discord.gg/pzsYhXKc3P")
+end
+
+-- Notify toàn màn hình với ảnh
+pcall(function()
+    local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    ScreenGui.Name = "ShinichiFullNotify"
+
+    local ImageLabel = Instance.new("ImageLabel", ScreenGui)
+    ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+    ImageLabel.Image = "rbxassetid://78774998900413"
+    ImageLabel.BackgroundTransparency = 1
+    ImageLabel.ImageTransparency = 0
+    ImageLabel.ZIndex = 9999
+
+    local TextLabel = Instance.new("TextLabel", ScreenGui)
+    TextLabel.Size = UDim2.new(1, 0, 0.1, 0)
+    TextLabel.Position = UDim2.new(0, 0, 0.45, 0)
+    TextLabel.Text = "Shinichi Hub"
+    TextLabel.Font = Enum.Font.GothamBold
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel.TextScaled = true
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.ZIndex = 9999
+
+    task.delay(3, function()
+        for i = 0, 1, 0.05 do
+            ImageLabel.ImageTransparency = i
+            TextLabel.TextTransparency = i
+            wait(0.03)
+        end
+        ScreenGui:Destroy()
+    end)
+end)
+
+-- Function load
+local function loadFrom(url)
+    loadstring(game:HttpGet(url))()
+end
+
+-- Tự động nhận diện game
+local placeId = game.PlaceId
+local gameName = game:GetService("MarketplaceService"):GetProductInfo(placeId).Name:lower()
+
+-- BLOX FRUITS
+if gameName:find("blox fruits") or placeId == 7449423635 or placeId == 2753915549 then
+    if not _G.BFScriptLoaded then
+        _G.BFScriptLoaded = true
+
+        -- Chỉ load phần nào được bật
+        if _G.loadMain then
+            loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/bloxfruit.lua")
+        end
+
+        if _G.loadAimbot then
+            loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/bloxfruit-aimbot.lua")
+        end
+    end
+
+-- DEAD RAIL
+elseif gameName:find("dead rail") or placeId == 15376909604 then
+    if not _G.DeadRailLoaded then
+        _G.DeadRailLoaded = true
+        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/deadrail.lua")
+    end
+
+-- FISCH
+elseif gameName:find("fisch") or placeId == 15517024339 then
+    if not _G.FischLoaded then
+        _G.FischLoaded = true
+        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/fisch.lua")
+    end
+
+-- BLUE LOCK
+elseif gameName:find("blue lock") or placeId == 15516513985 then
+    if not _G.BlueLockLoaded then
+        _G.BlueLockLoaded = true
+        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/bluelockdivals.lua")
+    end
+end
