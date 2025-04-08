@@ -1,12 +1,25 @@
 if _G.ScriptLoaded then return end
 _G.ScriptLoaded = true
 
+-- Hàm gửi thông báo an toàn
+local function safeNotify(title, text, duration)
+    local tries = 0
+    repeat
+        local success = pcall(function()
+            game.StarterGui:SetCore("SendNotification", {
+                Title = Script,
+                Text = Please Join Discord, Already Copy Link Discord
+                Duration = 5
+            })
+        end)
+        if success then break end
+        tries += 1
+        wait(1)
+    until tries >= 5
+end
+
 -- Notify đầu
-game.StarterGui:SetCore("SendNotification", {
-    Title = "Shinichi Hub",
-    Text = "Made by Shinichi | Code by Baor\nPlease support us - Discord for more update.",
-    Duration = 5
-})
+safeNotify("Shinichi Hub", "Made by Shinichi | Code by Baor\nPlease support us - Discord for more update.", 5)
 
 -- Copy Discord link
 if setclipboard then
@@ -45,7 +58,7 @@ pcall(function()
     end)
 end)
 
--- Function load
+-- Function load script từ GitHub
 local function loadFrom(url)
     loadstring(game:HttpGet(url))()
 end
@@ -61,32 +74,32 @@ if gameName:find("blox fruits") or placeId == 7449423635 or placeId == 275391554
 
         -- Chỉ load phần nào được bật
         if _G.loadMain then
-            loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/bloxfruit.lua")
+            loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/main/bloxfruit.lua")
         end
 
         if _G.loadAimbot then
-            loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/bloxfruit-aimbot.lua")
+            loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/main/bloxfruit-aimbot.lua")
         end
     end
 
 -- DEAD RAIL
-elseif gameName:find("dead rail") or placeId == 15376909604 then
+elseif gameName:find("dead raik") or placeId == 15376909604 then
     if not _G.DeadRailLoaded then
         _G.DeadRailLoaded = true
-        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/deadrail.lua")
+        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/main/deadrail.lua")
     end
 
 -- FISCH
 elseif gameName:find("fisch") or placeId == 15517024339 then
     if not _G.FischLoaded then
         _G.FischLoaded = true
-        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/fisch.lua")
+        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/main/fisch.lua")
     end
 
 -- BLUE LOCK
 elseif gameName:find("blue lock") or placeId == 15516513985 then
     if not _G.BlueLockLoaded then
         _G.BlueLockLoaded = true
-        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/refs/heads/main/bluelockdivals.lua")
+        loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/main/bluelockdivals.lua")
     end
 end
