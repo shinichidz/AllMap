@@ -7,9 +7,9 @@ local function safeNotify(title, text, duration)
     repeat
         local success = pcall(function()
             game.StarterGui:SetCore("SendNotification", {
-                Title = Script,
-                Text = Please Join Discord, Already Copy Link Discord
-                Duration = 5
+                Title = title,
+                Text = text,
+                Duration = duration
             })
         end)
         if success then break end
@@ -28,17 +28,20 @@ end
 
 -- Notify toàn màn hình với ảnh
 pcall(function()
-    local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "ShinichiFullNotify"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.Parent = game:GetService("CoreGui")
 
-    local ImageLabel = Instance.new("ImageLabel", ScreenGui)
+    local ImageLabel = Instance.new("ImageLabel")
     ImageLabel.Size = UDim2.new(1, 0, 1, 0)
     ImageLabel.Image = "rbxassetid://78774998900413"
     ImageLabel.BackgroundTransparency = 1
     ImageLabel.ImageTransparency = 0
     ImageLabel.ZIndex = 9999
+    ImageLabel.Parent = ScreenGui
 
-    local TextLabel = Instance.new("TextLabel", ScreenGui)
+    local TextLabel = Instance.new("TextLabel")
     TextLabel.Size = UDim2.new(1, 0, 0.1, 0)
     TextLabel.Position = UDim2.new(0, 0, 0.45, 0)
     TextLabel.Text = "Shinichi Hub"
@@ -47,6 +50,7 @@ pcall(function()
     TextLabel.TextScaled = true
     TextLabel.BackgroundTransparency = 1
     TextLabel.ZIndex = 9999
+    TextLabel.Parent = ScreenGui
 
     task.delay(3, function()
         for i = 0, 1, 0.05 do
@@ -72,7 +76,6 @@ if gameName:find("blox fruits") or placeId == 7449423635 or placeId == 275391554
     if not _G.BFScriptLoaded then
         _G.BFScriptLoaded = true
 
-        -- Chỉ load phần nào được bật
         if _G.loadMain then
             loadFrom("https://raw.githubusercontent.com/shinichi-dz/phucshinsayhi/main/bloxfruit.lua")
         end
